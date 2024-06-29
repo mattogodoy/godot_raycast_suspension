@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://caawnny3sla4l"]
+
+[ext_resource type="Material" uid="uid://c2i3g1cibgqax" path="res://materials/floor_material.tres" id="1_detry"]
+[ext_resource type="PackedScene" uid="uid://bwek24kuslpjo" path="res://scenes/car.tscn" id="2_fxr5i"]
+[ext_resource type="Script" path="res://addons/free_look_camera/free_look_camera.gd" id="3_pdjll"]
+[ext_resource type="Material" uid="uid://8djc65nvhdl" path="res://materials/wall_material.tres" id="4_6x6p7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qfltw"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1h6mh"]
+size = Vector3(200, 1, 200)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_tvg1x"]
+
+[sub_resource type="Sky" id="Sky_ilnma"]
+sky_material = SubResource("PhysicalSkyMaterial_tvg1x")
+
+[sub_resource type="Environment" id="Environment_4o0x1"]
+background_mode = 2
+sky = SubResource("Sky_ilnma")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
+
+[node name="World" type="Node3D"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_qfltw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground/CollisionShape3D"]
+material_override = ExtResource("1_detry")
+mesh = SubResource("BoxMesh_1h6mh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4o0x1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.432227, 0.901765, 0, -0.901765, -0.432227, -3.55354, 19.8287, -11.2222)
+light_energy = 2.697
+shadow_enabled = true
+
+[node name="Car" parent="." instance=ExtResource("2_fxr5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.232039, 2.85456, 0)
+debug = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.0229785, -0.22526, 0.974028, 0.0412335, 0.973242, 0.226051, -0.998885, 0.0453569, -0.0130754, 17.1178, 9.04123, 28.5527)
+script = ExtResource("3_pdjll")
+
+[node name="Ramp" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.241871, 18.9866)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ramp"]
+transform = Transform3D(1, 0, 0, 0, 0.831683, 0.555251, 0, -0.555251, 0.831683, 0, 2.24282, 23.2339)
+material_override = ExtResource("4_6x6p7")
+use_collision = true
+size = Vector3(3.89087, 0.212891, 5.80493)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Ramp"]
+transform = Transform3D(-1, -4.85416e-08, 7.2708e-08, -1.57782e-24, 0.831683, 0.555251, -8.74228e-08, 0.555251, -0.831683, 0, 2.24282, 27.9318)
+material_override = ExtResource("4_6x6p7")
+use_collision = true
+size = Vector3(3.89087, 0.212891, 5.80493)
+
+[node name="Ramp2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.67489)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ramp2"]
+transform = Transform3D(1, 0, 0, 0, 0.981263, 0.192676, 0, -0.192676, 0.981263, 0, 0.977728, 23.2339)
+material_override = ExtResource("4_6x6p7")
+use_collision = true
+size = Vector3(3.89087, 0.212891, 5.80493)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Ramp2"]
+transform = Transform3D(-0.999991, 0.000833977, -0.00424728, -3.7827e-20, 0.981262, 0.192676, 0.00432839, 0.192674, -0.981253, 0, 0.977728, 28.856)
+material_override = ExtResource("4_6x6p7")
+use_collision = true
+size = Vector3(3.89087, 0.212891, 5.80493)
