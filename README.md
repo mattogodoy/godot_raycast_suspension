@@ -3,6 +3,8 @@
 This project demosntrates the use of raycasts to simulate a realistic and adjustable suspension system.
 It also uses the Jolt physics engine.
 
+https://github.com/mattogodoy/godot_raycast_suspension/assets/1627178/426a5fc8-d616-44b3-bb9d-79be3f1fdb52
+
 ## Controls
 
 - Use the arrow keys to control the car
